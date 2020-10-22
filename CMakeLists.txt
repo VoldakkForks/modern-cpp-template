@@ -10,6 +10,9 @@ project(
   LANGUAGES CXX
 )
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 #
 # Set project options
 #
@@ -54,17 +57,20 @@ include(cmake/SourcesAndHeaders.cmake)
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME} ${exe_sources})
-  add_library(${PROJECT_NAME}_LIB ${headers} ${sources})
+  add_library(${PROJECT_NAME}_LIB ${public_headers} ${headers} ${sources})
 elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 else()
   add_library(
     ${PROJECT_NAME}
+    ${public_headers}
     ${headers}
     ${sources}
   )
 endif()
 
+verbose_message("Found the following public header files:")
+verbose_message(${public_headers})
 verbose_message("Found the following header files:")
 verbose_message(${headers})
 verbose_message("Found the following source files:")

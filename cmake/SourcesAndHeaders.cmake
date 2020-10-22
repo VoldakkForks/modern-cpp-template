@@ -1,12 +1,16 @@
-set(sources
-    src/tmp.cpp
+file(GLOB_RECURSE sources
+	CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/example/*.cpp"
+)
+
+file(GLOB_RECURSE headers
+	CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/example/*.hpp"
 )
 
 set(exe_sources
-		src/main.cpp
-		${sources}
+    src/main.cpp
+    ${sources}
 )
 
-set(headers
-    include/project/tmp.hpp
+set(public_headers
+    include/example/example.hpp
 )
